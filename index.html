@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Careers @ Firefly</title>
+    <style>
+       
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <!-- Page 1: Basic Information -->
+         <h1>Careers @ Firefly</h1>
+         <p>Hello! Thank you for considering a career with Firefly!</p>
+         <p>Please fill out this Form to apply for a Role with us. This helps us evaluate a large no. of applications faster. If your application gets shortlisted, you will typically need to take a Test, and thereafter, an Interview. Best wishes!</p>
+        <br>
+        <div class="form-page active" id="page1">
+            <h2>Basic Information</h2>
+            <form id="registrationForm">
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input type="text" id="firstName" name="firstName" required>
+                    <div class="error" id="firstNameError"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" id="lastName" name="lastName" required>
+                    <div class="error" id="lastNameError"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="contactNumber">Contact Number</label>
+                    <input type="tel" id="contactNumber" name="contactNumber" required>
+                    <small>Format: +91 followed by 10 digits</small>
+                    <div class="error" id="contactNumberError"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required>
+                    <div class="error" id="emailError"></div>
+                </div>
+                
+                <div class="form-navigation">
+                    <button type="button" id="nextPage1">Next</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Page 2: Location & Engagement Preferences -->
+        <div class="form-page" id="page2">
+            <h2>Your Location & Engagement Preferences</h2>
+            
+            <div class="form-group">
+                <h3>Your Location Preference</h3>
+                <div>
+                    <div>
+                        <input type="radio" id="locationStudio" name="locationPreference" value="At Firefly Creative Studio, Hyderabad, India" required>
+                        <label for="locationStudio">At Firefly Creative Studio, Hyderabad, India</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="locationHome" name="locationPreference" value="Work from Home" required>
+                    <label for="locationHome">Work from Home</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <h3>Your Engagement Preference</h3>
+                <div>
+                    <div>
+                        <input type="radio" id="engagementFullTime" name="engagementPreference" value="Full-time Employment" required>
+                        <label for="engagementFullTime">Full-time Employment</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="engagementFreelance" name="engagementPreference" value="Freelance" required>
+                        <label for="engagementFreelance">Freelance</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-navigation">
+                <button type="button" id="prevPage2">Previous</button>
+                <button type="button" id="nextPage2">Next</button>
+            </div>
+        </div>
+
+        <!-- Page 3: Professional Domain -->
+        <div class="form-page" id="page3">
+            <h2>Your Professional Domain</h2>
+            
+            <div class="form-group">
+                <h3>Select your Professional Domain</h3>
+                <div>
+                    <div>
+                        <input type="radio" id="domain3D" name="professionalDomain" value="Hands-on 3D Visual Effects/Animation/Design/Fine-Arts Craftsperson" required>
+                        <label for="domain3D">Hands-on 3D Visual Effects/Animation/Design/Fine-Arts Craftsperson</label>
+                    </div>
+
+                    <div>
+                        <input type="radio" id="domain2D" name="professionalDomain" value="Hands-on 2D Visual Effects/Animation/Design/Fine-Arts Craftsperson" required>
+                        <label for="domain2D">Hands-on 2D Visual Effects/Animation/Design/Fine-Arts Craftsperson</label>
+                    </div>
+
+                    <div>
+                        <input type="radio" id="domainGeneralist" name="professionalDomain" value="Hands-on Generalist Visual Effects/Animation/Design/Fine-Arts Craftsperson" required>
+                        <label for="domainGeneralist">Hands-on Generalist Visual Effects/Animation/Design/Fine-Arts Craftsperson</label>
+                    </div>
+
+                    <div>
+                        <input type="radio" id="domainSupervisor/Co-ordinator" name="professionalDomain" value="Supervisor/Co-ordinator" required>
+                        <label for="domainSupervisor/Co-ordinator">Supervisor/Co-ordinator</label>
+                    </div>
+
+                    <div>
+                        <input type="radio" id="domainSoftwareDeveloper" name="professionalDomain" value="Software Developer" required>
+                        <label for="domainSoftwareDeveloper">Software Developer</label>
+                    </div>
+                    
+                    <div>
+                        <input type="radio" id="domainHardwareSystems" name="professionalDomain" value="Hardware Systems" required>
+                        <label for="domainHardwareSystems">Hardware Systems</label>
+                    </div>
+
+                    <div>
+                        <input type="radio" id="domainHR/Accounts/LegalExecutive" name="professionalDomain" value="HR/Accounts/Legal Executive" required>
+                        <label for="domainHR/Accounts/LegalExecutive">HR/Accounts/Legal Executive</label>
+                    </div>
+
+                    <div>
+                        <input type="radio" id="other" name="professionalDomain" value="Other" required>
+                        <label for="other">Other</label>
+                    </div>
+                </div>
+                
+                <div id="otherRoleContainer" style="display:none;">
+                    <label for="otherRole">Specify Role:</label>
+                    <input type="text" id="otherRole" name="otherRole">
+                </div>
+            </div>
+            
+            <div class="form-navigation">
+                <button type="button" id="prevPage3">Previous</button>
+                <button type="button" id="nextPage3">Next</button>
+            </div>
+        </div>
+
+        <!-- Page 4: 3D Skills -->
+        <div class="form-page" id="page4">
+            <h2>Hands-on 3D Skills</h2>
+            
+            <div class="form-group">
+                <h3>Tick all the 3D skills you can deliver</h3>
+                <div>
+                    <div>
+                        <input type="checkbox" id="3dHardSurfaceAssetBuild" name="3dSkills" value="Hard Surface Asset Build (Model, Texture, Shade)">
+                        <label for="3dHardSurfaceAssetBuild">Hard Surface Asset Build (Model, Texture, Shade)</label>
+                    </div>
+
+                    <div>
+                        <input type="checkbox" id="3dOrganicAssetBuild" name="3dSkills" value="Organic Asset Build (Model/Sculpt, Texture, Shade)">
+                        <label for="3dOrganicAssetBuild">Organic Asset Build (Model/Sculpt, Texture, Shade)</label>
+                    </div>
+
+                    <div>
+                        <input type="checkbox" id="3dLayout" name="3dSkills" value="Layout">
+                        <label for="3dLayout">Layout</label>
+                    </div>
+
+                    <div>
+                        <input type="checkbox" id="3dRigging" name="3dSkills" value="Rigging">
+                        <label for="3dRigging">Rigging</label>
+                    </div>
+
+                    <div>
+                        <input type="checkbox" id="3dObjectAnimation" name="3dSkills" value="Object Animation">
+                        <label for="3dObjectAnimation">Object Animation</label>
+                    </div>
+
+                    <div>
+                        <input type="checkbox" id="3dCharacterAnimation" name="3dSkills" value="Character Animation">
+                        <label for="3dCharacterAnimation">Character Animation</label>
+                    </div>
+
+                    <div>
+                        <input type="checkbox" id="3dFluidsSimulation" name="3dSkills" value="Fluids Simulation">
+                        <label for="3dFluidsSimulation">Fluids Simulation</label>
+                    </div>
+
+                    <div>
+                        <input type="checkbox" id="3dParticle/RigidSimulation" name="3dSkills" value="Particle/Rigid Body Simulation">
+                        <label for="3dParticle/RigidSimulation">Particle/Rigid Body Simulation</label>
+                    </div>
+
+                    <div>
+                        <input type="checkbox" id="3dLighting" name="3dSkills" value="Lighting">
+                        <label for="3dLighting">Lighting</label>
+                    </div>
+
+                    <div>
+                        <input type="checkbox" id="3dOjectsDesign/ProductDesign" name="3dSkills" value="3D Objects Design/Product Design">
+                        <label for="3dOjectsDesign/ProductDesign">3D Objects Design/Product Design</label>
+                    </div>
+
+                    <div>
+                        <input type="checkbox" id="3dCharacterDesign" name="3dSkills" value="3D Character Design">
+                        <label for="3dCharacterDesign">3D Character Design</label>
+                    </div>
+
+                    <div>
+                        <input type="checkbox" id="3dEnvironmentDesign/Architecture" name="3dSkills" value="3D Environment Design/Architecture">
+                        <label for="3dEnvironmentDesign/Architecture">3D Environment Design/Architecture</label>
+                    </div>
+
+                    <div>
+                        <input type="checkbox" id="3dAnimatics" name="3dSkills" value="3D Animatics">
+                        <label for="3dAnimatics">3D Animatics</label>
+                    </div>
+
+                    <div>
+                        <input type="checkbox" id="3dMotionGraphics" name="3dSkills" value="3D Motion Graphics">
+                        <label for="3dMotionGraphics">3D Motion Graphics</label>
+                    </div>
+
+                    <div>
+                        <input type="checkbox" id="3dPhysicalModelmaking/Sculpting" name="3dSkills" value="Physical Modelmaking/Sculpting">
+                        <label for="3dPhysicalModelmaking/Sculpting">Physical Modelmaking/Sculpting</label>
+                    </div>
+                </div>
+                <div class="error" id="3dSkillsError"></div>
+            </div>
+            
+            <div class="form-navigation">
+                <button type="button" id="prevPage4">Previous</button>
+                <button type="button" id="nextPage4">Next</button>
+            </div>
+        </div>
+
+        <!-- Page 5: 2D Skills -->
+        <div class="form-page" id="page5">
+            <h2>Hands-on 2D Skills</h2>
+            
+            <div class="form-group">
+                <h3>Tick all the 2D skills you can deliver</h3>
+                <div>
+                    <div>
+                        <input type="checkbox" id="2dRotoscopy" name="2dSkills" value="Rotoscopy">
+                        <label for="2dRotoscopy">Rotoscopy</label>
+                    </div>
+
+                    <div>
+                        <input type="checkbox" id="2dPaint" name="2dSkills" value="Paint">
+                        <label for="2dPaint">Paint</label>
+                    </div>
+
+                    <div>
+                        <input type="checkbox" id="2dMatchmove" name="2dSkills" value="Matchmove">
+                        <label for="2dMatchmove">Matchmove</label>
+                    </div>
+                    
+                    <div>
+                        <input type="checkbox" id="2dCompositing" name="2dSkills" value="Compositing">
+                        <label for="2dCompositing">Compositing</label>
+                    </div>
+
+                    <div>
+                        <input type="checkbox" id="2dMattePainting" name="2dSkills" value="2D Matte Painting">
+                        <label for="2dMattePainting">2D Matte Painting</label>
+                    </div>
+                    
+                    <div>
+                        <input type="checkbox" id="2dObjectDesign" name="2dSkills" value="2D Objects Design">
+                        <label for="2dObjectDesign">2D Objects Design</label>
+                    </div>
+
+                    <div>
+                        <input type="checkbox" id="2dCharacterDesign" name="2dSkills" value="2D Character Design">
+                        <label for="2dCharacterDesign">2D Character Design</label>
+                    </div>
+
+                    <div>
+                        <input type="checkbox" id="2dEnvironmentDesign" name="2dSkills" value="2D Environment Design">
+                        <label for="2dEnvironmentDesign">2D Environment Design</label>
+                    </div>
+
+                    <div>
+                        <input type="checkbox" id="2dAnimatics" name="2dSkills" value="2D Animatics">
+                        <label for="2dAnimatics">2D Animatics</label>
+                    </div>
+                    
+                    <div>
+                        <input type="checkbox" id="2dAnimation" name="2dSkills" value="2D Animation">
+                        <label for="2dAnimation">2D Animation</label>
+                    </div>
+
+                    <div>
+                        <input type="checkbox" id="2d/2.5dMotionGraphics" name="2dSkills" value="2D/2.5D Motion Graphics">
+                        <label for="2d/2.5dMotionGraphics">2D/2.5D Motion Graphics</label>      
+                    </div>
+
+                    <div>
+                        <input type="checkbox" id="2dGraphicDesign" name="2dSkills" value="Graphic Design">
+                        <label for="2dGraphicDesign">Graphic Design</label>  
+                    </div>
+
+                    <div>
+                        <input type="checkbox" id="2dPhysicalIllustration/Painting" name="2dSkills" value="Physical Illustration/Painting">
+                        <label for="2dPhysicalIllustration">Physical Illustration/Painting</label>
+                    </div>  
+                </div>
+                <div class="error" id="2dSkillsError"></div>
+            </div>
+            
+            <div class="form-navigation">
+                <button type="button" id="prevPage5">Previous</button>
+                <button type="button" id="nextPage5">Next</button>
+            </div>
+        </div>
+
+        <!-- Page 6: Generalist Skills -->
+        <div class="form-page" id="page6">
+            <h2>Hands-on Generalist Skills</h2>
+            
+            <div class="form-group">
+                <h3>Tick all the Generalist skills you can deliver</h3>
+                <div>
+                    <div>
+                        <input type="checkbox" id="generalist3dAssetBuild" name="generalistSkills" value="3D Asset Build">
+                        <label for="generalist3dAssetBuild">3D Asset Build</label>
+                    </div>
+
+                    <div>
+                        <input type="checkbox" id="generalistRigging" name="generalistSkills" value="Rigging">
+                        <label for="generalistRigging">Rigging</label>
+                    </div>
+                    
+                    <div>
+                        <input type="checkbox" id="generalist3dLayout" name="generalistSkills" value="3D Layout">
+                        <label for="generalist3dLayout">3D Layout</label>
+                    </div>
+
+                    <div>
+                        <input type="checkbox" id="generalist3dAnimation" name="generalistSkills" value="3D Animation">
+                        <label for="generalist3dAnimation">3D Animation</label>
+                    </div>
+
+                    <div>
+                        <input type="checkbox" id="generalist3dSimulations" name="generalistSkills" value="3D Simulations">
+                        <label for="generalist3dSimulations">3D Simulations</label>
+                    </div>
+
+                    <div>
+                        <input type="checkbox" id="generalist3dLighting" name="generalistSkills" value="3D Lighting">
+                        <label for="generalist3dLighting">3D Lighting</label>
+                    </div>
+
+                    <div>
+                        <input type="checkbox" id="generalist2dPrep" name="generalistSkills" value="2D Prep">
+                        <label for="generalist2dPrep">2D Prep</label>
+                    </div>
+
+                    <div>
+                        <input type="checkbox" id="generalist2d/2.5d/3dCompositing" name="generalistSkills" value="2D/2.5D/3D Compositing">
+                        <label for="generalist2d/2.5d/3dCompositing">2D/2.5D/3D Compositing</label>
+                    </div>
+
+                    <div>
+                        <input type="checkbox" id="generalistMotionGraphics" name="generalistSkills" value="Motion Graphics">
+                        <label for="financeFinTech">Motion Graphics</label>
+                    </div>
+                    
+                    <div>
+                        <input type="checkbox" id="generalistObjectsDesign" name="generalistSkills" value="Objects Design">
+                        <label for="generalistObjectsDesign">Objects Design</label>
+                    </div>
+
+                    <div>
+                        <input type="checkbox" id="generalistEnvironmentsDesign" name="generalistSkills" value="Environments Design">
+                        <label for="generalistEnvironmentsDesign">Environments Design</label>
+                    </div>
+
+                    <div>
+                        <input type="checkbox" id="generalistAnimatics" name="generalistSkills" value="Animatics">
+                        <label for="generalistAnimatics">Animatics</label>
+                    </div>
+                </div>
+                <div class="error" id="generalistSkillsError"></div>
+            </div>
+            
+            <div class="form-navigation">
+                <button type="button" id="prevPage6">Previous</button>
+                <button type="button" id="nextPage6">Next</button>
+            </div>
+        </div>
+
+        <!-- Page 7: Professional Background -->
+        <div class="form-page" id="page7">
+            <h2>Work Experience</h2>
+            
+            <div class="form-group">
+                <h3>Your Work Experience</h3>
+                <div>
+                    <div>
+                        <input type="radio" id="focusEducation" name="professionalBackground" value="Fresher" required>
+                        <label for="focusEducation">I am a Fresher</label>
+                    </div>
+                    
+                    <div>
+                        <input type="radio" id="focusExperience" name="professionalBackground" value="Experience" required>
+                        <label for="focusExperience">I have Work Experience</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-navigation">
+                <button type="button" id="prevPage7">Previous</button>
+                <button type="button" id="nextPage7">Next</button>
+            </div>
+        </div>
+
+        <!-- Page 8: Academic Record -->
+        <div class="form-page" id="page8">
+            <h2>Academic Record</h2>
+            <h3>Please list out your Academic Record</h3>
+            <div id="educationContainer">
+                <div class="education-entry">
+                    
+                    <input type="number" name="educationYearFrom" placeholder="Year From" required>
+                    <input type="number" name="educationYearTo" placeholder="Year To"  required>
+                    <input type="text" name="educationInstitution" placeholder="School/Institution" required>
+                    <input type="text" name="educationCourse" placeholder="Course/Degree" required>
+                    <button type="button" class="remove-education">×</button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <button type="button" id="addEducation">+ Add Another Education</button>
+            </div>
+            
+            <div class="form-navigation">
+                <button type="button" id="prevPage8">Previous</button>
+                <button type="button" id="nextPage8">Next</button>
+            </div>
+        </div>
+
+        <!-- Page 9: Work Experience Details -->
+        <div class="form-page" id="page9">
+            <h2>Work Experience Details</h2>
+            <h3>Please list out your Work Experience Details</h3>
+            <div id="experienceContainer">
+                <div class="experience-entry">
+                    
+                    <input type="number" name="experienceYearFrom" placeholder="Year From"  required>
+                    <input type="number" name="experienceYearTo" placeholder="Year To" required>
+                    <input type="text" name="experienceCompany" placeholder="Company" required>
+                    <input type="text" name="experienceRole" placeholder="Role" required>
+                    <button type="button" class="remove-experience">×</button>
+                </div>
+            </div>
+            
+           
+        <div class="form-group">
+            <button type="button" id="addExperience">+ Add Another Experience</button>
+        </div>
+        
+        <div class="form-navigation">
+            <button type="button" id="prevPage9">Previous</button>
+            <button type="button" id="nextPage9">Next</button>
+        </div>
+    </div>
+
+
+        <!-- Page 10: Show Reels -->
+        <div class="form-page" id="page10">
+            <h2>Links to your Showreel/Work Samples</h2>
+            <p>Please list out Links your Showreel/Work Samples</p>
+            
+            <div id="showReelsContainer">
+                <div class="show-reels-entry">
+                    <input type="url" name="showReelLink" placeholder="Paste your show reel link here" required>
+                    <button type="button" class="remove-show-reel">×</button>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <button type="button" id="addShowReel">+ Add Another Show Reel</button>
+            </div>
+            
+            <div class="form-navigation">
+                <button type="button" id="prevPage10">Previous</button>
+                <button type="button" id="nextPage10">Next</button>
+            </div>
+        </div>
+
+        <!-- Page 11: Terms and Conditions -->
+        <div class="form-page" id="page11">
+            <h2>Terms and Conditions</h2>
+            
+            <div class="terms-container">
+                <h3>Terms of Application</h3>
+                <p>Please read and accept the following terms:</p>
+                <ul>
+                    <li>I confirm that all the information I have shared above is accurate & verifiable.</li>
+                    <li>I specifically confirm that I have directly produced the work in my Showreel(s)/Work Samples as an Individual/Team Member.</li>
+                    <li>I specifically confirm that the work in my Showreel(s)/Work Samples is not AI-generated.</li>
+                </ul>
+            </div>
+            
+            <div class="terms-agreement">
+                <input type="checkbox" id="termsCheckbox" required>
+                <label for="termsCheckbox">I have read and agree to the terms and conditions</label>
+            </div>
+            
+            <div class="form-navigation">
+                <button type="button" id="prevPage11">Previous</button>
+                <button type="button" id="submitApplication" disabled>Submit Application</button>
+            </div>
+        </div>
+    </div>
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

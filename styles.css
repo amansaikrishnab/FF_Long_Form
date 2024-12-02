@@ -1,0 +1,274 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+:root {
+    --primary-orange: #FF6B35;
+    --secondary-orange: #FF9F1C;
+    --light-background: #FAF9F9;
+    --dark-text: #333;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--light-background);
+    margin: 0;
+    padding: 20px;
+    color: var(--dark-text);
+    line-height: 1.6;
+}
+
+.form-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* Headings Spacing and Styling */
+h1 {
+    color: var(--primary-orange);
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h1 + p {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+h2 {
+    color: var(--primary-orange);
+    text-align: center;
+    position: relative;
+    margin-bottom: 30px;
+    padding: 0 20px;
+}
+
+h2::before, h2::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 30%;
+    height: 2px;
+    background-color: var(--primary-orange);
+    transform: translateY(-50%);
+}
+
+h2::before {
+    left: 0;
+}
+
+h2::after {
+    right: 0;
+}
+
+/* Form Page Layout */
+.form-page {
+    display: none;
+}
+
+.form-page.active {
+    display: block;
+}
+
+/* Form Group Styling */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group > h3 {
+    margin-bottom: 10px;
+}
+
+/* Improved Radio and Checkbox Styling */
+.form-group > div {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group > div > div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    position: relative;
+}
+
+.form-group > div > div > input[type="radio"],
+.form-group > div > div > input[type="checkbox"] {
+    position: absolute;
+    left: 0;
+    margin-right: 10px;
+    transform: translateY(-50%);
+    top: 50%;
+}
+
+.form-group > div > div > label {
+    margin-bottom: 0;
+    display: flex;
+    align-items: center;
+    padding-left: 25px; /* Space for checkbox/radio */
+    cursor: pointer;
+    width: 100%;
+}
+
+/* Remove button styling */
+.remove-education,
+.remove-experience,
+.remove-show-reel {
+    background-color: #ff4444;
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+}
+
+/* Input Styling */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="number"],
+input[type="url"] {
+    margin-top: 5px;
+    padding: 8px;
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* Experience and Education Sections */
+.education-entry,
+.experience-entry {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.education-entry input,
+.experience-entry input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* Show Reels Section */
+.show-reels-entry {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.show-reels-entry input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* Button Styling */
+.form-navigation {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.form-navigation button {
+    background-color: var(--primary-orange);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 10px;
+    transition: background-color 0.3s ease;
+}
+
+.form-navigation button:hover {
+    background-color: var(--secondary-orange);
+}
+
+.form-navigation button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+#addEducation,
+#addExperience,
+#addShowReel {
+    background-color: var(--secondary-orange);
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+/* Error Message Styling */
+.error {
+    color: #ff4444;
+    font-size: 0.8em;
+    margin-top: 5px;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .form-container {
+        padding: 20px;
+    }
+
+    .education-entry,
+    .experience-entry,
+    .show-reels-entry {
+        flex-direction: column;
+    }
+}
+
+/* Small screen adjustments */
+@media (max-width: 480px) {
+    .form-navigation button {
+        padding: 8px 15px;
+        margin: 0 5px;
+    }
+}
+
+.form-group > div {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group > div > div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.form-group input[type="radio"],
+.form-group input[type="checkbox"] {
+    margin-right: 10px;
+    flex-shrink: 0; /* Prevent input from shrinking */
+}
+
+.form-group label {
+    flex-grow: 1; /* Allow label to take up remaining space */
+    display: flex;
+    align-items: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .form-group > div > div {
+        flex-direction: row;
+        align-items: center;
+    }
+}
