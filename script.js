@@ -558,7 +558,6 @@ if (professionalDomainElement) {
         }
     });
 
-    console.log(JSON.stringify(formData,null,2));
 
     return formData;
 }
