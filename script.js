@@ -564,7 +564,7 @@ if (professionalDomainElement) {
 // Function to submit data to Google Apps Script
 function submitToGoogleScript(formData) {
     // Replace with your Google Apps Script deployment URL
-    const scriptUrl = 'https://script.google.com/macros/s/AKfycbw75YmsdT78Mtopomjuf6wUIxJkEamWZIx7-ml7OscuYn73O_i3i7fxw7tzjqw-TBy9jQ/exec';
+    const scriptUrl = 'https://script.google.com/macros/s/AKfycbzsGF9itiA6Q18sK7Syg7MN22NBfnWtiIdXeR4tkjohTyoOqnyzgMlsYQDg_tSpvBWk/exec';
 
     return fetch(scriptUrl, {
         method: 'POST',
