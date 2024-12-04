@@ -53,14 +53,13 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             document.getElementById('lastNameError').textContent = '';
         }
+        const contactNumberRegex = /^\+\d{1,3}\d{10}$/;
 
-        // Contact Number Validation
-        const phoneRegex = /^\+91\d{10}$/;
         if (!contactNumber.value.trim()) {
             document.getElementById('contactNumberError').textContent = 'Contact Number is required';
             isValid = false;
-        } else if (!phoneRegex.test(contactNumber.value)) {
-            document.getElementById('contactNumberError').textContent = 'Please enter a valid phone number (+91 followed by 10 digits)';
+        } else if (!contactNumberRegex.test(contactNumber.value.replace(/[^\d+]/g, ''))) {
+            document.getElementById('contactNumberError').textContent = 'Invalid Mobile number. Must start with + and country code (1-3 digits) followed by 10-digit number';
             isValid = false;
         } else {
             document.getElementById('contactNumberError').textContent = '';
@@ -399,9 +398,14 @@ prevButtons.page10.addEventListener('click', function() {
         
         // Add remove button functionality
         const removeButton = newEntry.querySelector('.remove-education');
-        removeButton.addEventListener('click', function() {
-            container.removeChild(newEntry);
-        });
+        if (container.children.length > 0) {
+            removeButton.style.display = 'block'; // Make remove button visible
+            removeButton.addEventListener('click', function() {
+                container.removeChild(newEntry);
+            });
+        } else {
+            removeButton.style.display = 'none'; // Hide remove button for first entry
+        }
         
         container.appendChild(newEntry);
     });
@@ -416,9 +420,14 @@ prevButtons.page10.addEventListener('click', function() {
         
         // Add remove button functionality
         const removeButton = newEntry.querySelector('.remove-experience');
-        removeButton.addEventListener('click', function() {
-            container.removeChild(newEntry);
-        });
+        if (container.children.length > 0) {
+            removeButton.style.display = 'block'; // Make remove button visible
+            removeButton.addEventListener('click', function() {
+                container.removeChild(newEntry);
+            });
+        } else {
+            removeButton.style.display = 'none'; // Hide remove button for first entry
+        }
         
         container.appendChild(newEntry);
     });
@@ -433,9 +442,14 @@ prevButtons.page10.addEventListener('click', function() {
         
         // Add remove button functionality
         const removeButton = newEntry.querySelector('.remove-show-reel');
-        removeButton.addEventListener('click', function() {
-            container.removeChild(newEntry);
-        });
+        if (container.children.length > 0) {
+            removeButton.style.display = 'block'; // Make remove button visible
+            removeButton.addEventListener('click', function() {
+                container.removeChild(newEntry);
+            });
+        } else {
+            removeButton.style.display = 'none'; // Hide remove button for first entry
+        }
         
         container.appendChild(newEntry);
     });
@@ -446,6 +460,7 @@ prevButtons.page10.addEventListener('click', function() {
    function collectFormData() {
     const professionalDomainElement = document.querySelector('input[name="professionalDomain"]:checked');
     const otherRoleValue = document.getElementById('otherRole')?.value;
+    const professionalBackgroundElement = document.querySelector('input[name="professionalBackground"]:checked')?.value ;
     
     // Initialize the form data object
     const formData = {
@@ -503,47 +518,85 @@ if (professionalDomainElement) {
             formData.skills = " "
     }
 }
+// Function to reverse the date format from YYYY-MM-DD to DD-MM-YYYY
+function reverseDateFormat(date) {
+    if (!date) return "";
+    const [year, month, day] = date.split('-');
+    return `${day}-${month}-${year}`;
+}
+    // Modify the education and work experience collection
+    if (professionalDomainElement) {
+        // Special handling for Supervisor/Co-ordinator
+        if (professionalDomainElement.value === 'Supervisor/Co-ordinator') {
+            // Always collect work experience for Supervisor/Co-ordinator
+            const experienceEntries = document.querySelectorAll('#experienceContainer .experience-entry');
+            experienceEntries.forEach(entry => {
+                const yearFromInput = entry.querySelector('input[name="experienceYearFrom"]')?.value;
+                const yearToInput = entry.querySelector('input[name="experienceYearTo"]')?.value;
+                const yearFrom = yearFromInput ? reverseDateFormat(yearFromInput) : "";
+                const yearTo = yearToInput ? reverseDateFormat(yearToInput) : "";
+                const company = entry.querySelector('input[name="experienceCompany"]')?.value;
+                const role = entry.querySelector('input[name="experienceRole"]')?.value;
 
-    // Collect education entries
-    const educationEntries = document.querySelectorAll('#educationContainer .education-entry');
-    educationEntries.forEach(entry => {
-        const yearFrom = entry.querySelector('input[name="educationYearFrom"]')?.value;
-        const yearTo = entry.querySelector('input[name="educationYearTo"]')?.value;
-        const institution = entry.querySelector('input[name="educationInstitution"]')?.value;
-        const course = entry.querySelector('input[name="educationCourse"]')?.value;
+                if (yearFrom || yearTo || company || role) {
+                    const experienceItem = {
+                        yearFrom: yearFrom || '',
+                        yearTo: yearTo || '',
+                        company: company || '',
+                        role: role || ''
+                    };
+                    formData.workExperience.push(experienceItem);
+                }
+            });
+        } else {
+            // For other domains, use existing logic based on professional background
+            if (professionalBackgroundElement) {
+                if (professionalBackgroundElement.value === 'Fresher') {
+                    // Collect education entries
+                    const educationEntries = document.querySelectorAll('#educationContainer .education-entry');
+                    educationEntries.forEach(entry => {
+                        const yearFromInput = entry.querySelector('input[name="educationYearFrom"]')?.value;
+                        const yearToInput = entry.querySelector('input[name="educationYearTo"]')?.value;
+                        const yearFrom = yearFromInput ? reverseDateFormat(yearFromInput) : "";
+                        const yearTo = yearToInput ? reverseDateFormat(yearToInput) : "";
+                        const institution = entry.querySelector('input[name="educationInstitution"]')?.value;
+                        const course = entry.querySelector('input[name="educationCourse"]')?.value;
 
-        // Only add if at least one field has a value
-        if (yearFrom || yearTo || institution || course) {
-            const educationItem = {
-                yearFrom: yearFrom || '',
-                yearTo: yearTo || '',
-                institution: institution || '',
-                course: course || ''
-            };
-            formData.education.push(educationItem);
+                        if (yearFrom || yearTo || institution || course) {
+                            const educationItem = {
+                                yearFrom: yearFrom || '',
+                                yearTo: yearTo || '',
+                                institution: institution || '',
+                                course: course || ''
+                            };
+                            formData.education.push(educationItem);
+                        }
+                    });
+                } else {
+                    // Collect work experience entries
+                    const experienceEntries = document.querySelectorAll('#experienceContainer .experience-entry');
+                    experienceEntries.forEach(entry => {
+                        const yearFromInput = entry.querySelector('input[name="experienceYearFrom"]')?.value;
+                        const yearToInput = entry.querySelector('input[name="experienceYearTo"]')?.value;
+                        const yearFrom = yearFromInput ? reverseDateFormat(yearFromInput) : "";
+                        const yearTo = yearToInput ? reverseDateFormat(yearToInput) : "";
+                        const company = entry.querySelector('input[name="experienceCompany"]')?.value;
+                        const role = entry.querySelector('input[name="experienceRole"]')?.value;
+
+                        if (yearFrom || yearTo || company || role) {
+                            const experienceItem = {
+                                yearFrom: yearFrom || '',
+                                yearTo: yearTo || '',
+                                company: company || '',
+                                role: role || ''
+                            };
+                            formData.workExperience.push(experienceItem);
+                        }
+                    });
+                }
+            }
         }
-    });
-
-    // Collect work experience entries
-    const experienceEntries = document.querySelectorAll('#experienceContainer .experience-entry');
-    experienceEntries.forEach(entry => {
-        const yearFrom = entry.querySelector('input[name="experienceYearFrom"]')?.value;
-        const yearTo = entry.querySelector('input[name="experienceYearTo"]')?.value;
-        const company = entry.querySelector('input[name="experienceCompany"]')?.value;
-        const role = entry.querySelector('input[name="experienceRole"]')?.value;
-
-        // Only add if at least one field has a value
-        if (yearFrom || yearTo || company || role) {
-            const experienceItem = {
-                yearFrom: yearFrom || '',
-                yearTo: yearTo || '',
-                company: company || '',
-                role: role || ''
-            };
-            formData.workExperience.push(experienceItem);
-        }
-    });
-
+    }
     // Collect show reel entries
     const showReelEntries = document.querySelectorAll('#showReelsContainer .show-reels-entry');
     showReelEntries.forEach(entry => {
@@ -558,13 +611,14 @@ if (professionalDomainElement) {
         }
     });
 
+   
 
     return formData;
 }
 // Function to submit data to Google Apps Script
 function submitToGoogleScript(formData) {
     // Replace with your Google Apps Script deployment URL
-    const scriptUrl = 'https://script.google.com/macros/s/AKfycbzsGF9itiA6Q18sK7Syg7MN22NBfnWtiIdXeR4tkjohTyoOqnyzgMlsYQDg_tSpvBWk/exec';
+    const scriptUrl = 'https://script.google.com/macros/s/AKfycbwPjgy-DJJ_hK5fPg_fMe2MWZdKRdliR1FOR7xzAJheYbuQnVJlkVRbNxuaJn8kdLA9/exec';
 
     return fetch(scriptUrl, {
         method: 'POST',
