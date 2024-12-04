@@ -134,7 +134,8 @@ h2::after {
 }
 /* Remove button styling */
 .remove-education,
-.remove-experience {
+.remove-experience
+ {
     position: absolute;
     top:2px;
     right: 0px;
@@ -166,7 +167,6 @@ h2::after {
     width: 24px;
     height: 24px;
 }
-
 
 /* Input Styling */
 input[type="text"],
