@@ -134,8 +134,7 @@ h2::after {
 }
 /* Remove button styling */
 .remove-education,
-.remove-experience,
-.remove-show-reel {
+.remove-experience {
     position: absolute;
     top:2px;
     right: 0px;
@@ -153,6 +152,21 @@ h2::after {
     justify-content: center;
     margin-bottom: 5px;
 }
+.remove-show-reel{
+    background-color: #ff4444;
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+}
+
 
 /* Input Styling */
 input[type="text"],
