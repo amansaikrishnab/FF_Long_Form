@@ -551,7 +551,7 @@ function reverseDateFormat(date) {
         } else {
             // For other domains, use existing logic based on professional background
             if (professionalBackgroundElement) {
-                if (professionalBackgroundElement.value === 'Fresher') {
+                if (professionalBackgroundElement?.value === 'Fresher') {
                     // Collect education entries
                     const educationEntries = document.querySelectorAll('#educationContainer .education-entry');
                     educationEntries.forEach(entry => {
@@ -572,7 +572,7 @@ function reverseDateFormat(date) {
                             formData.education.push(educationItem);
                         }
                     });
-                } else {
+                } else if (professionalBackgroundElement?.value === 'Experienced') {
                     // Collect work experience entries
                     const experienceEntries = document.querySelectorAll('#experienceContainer .experience-entry');
                     experienceEntries.forEach(entry => {
