@@ -12,35 +12,39 @@
 <body>
     <div class="form-container">
         <!-- Page 1: Basic Information -->
-         <h1>Careers @ Firefly</h1>
-         <p>Hello! Thank you for considering a career with Firefly!</p>
-         <p>Please fill out this Form to apply for a Role with us. This helps us evaluate a large no. of applications faster. If your application gets shortlisted, you will typically need to take a Test, and thereafter, an Interview. Best wishes!</p>
-        <br>
         <div class="form-page active" id="page1">
+            <h1>Careers @ Firefly</h1>
+            <p>Hello! Thank you for considering a career with Firefly!</p>
+            <p>Please fill out this Form to apply for a Role with us. This helps us evaluate a large no. of applications faster. If your application gets shortlisted, you will typically need to take a Test, and thereafter, an Interview. Best wishes!</p>
+            <br>
             <h2>Basic Information</h2>
             <form id="registrationForm">
                 <div class="form-group">
                     <label for="firstName">First Name</label>
-                    <input type="text" id="firstName" name="firstName" required>
+                    <input type="text" id="firstName" name="firstName" class="first-name-input" required>
                     <div class="error" id="firstNameError"></div>
                 </div>
                 
                 <div class="form-group">
                     <label for="lastName">Last Name</label>
-                    <input type="text" id="lastName" name="lastName" required>
+                    <input type="text" id="lastName" name="lastName" class="last-name-input" required>
                     <div class="error" id="lastNameError"></div>
                 </div>
                 
                 <div class="form-group">
                     <label for="contactNumber">Contact Number</label>
-                    <input type="tel" id="contactNumber" name="contactNumber"  maxlength="14" required class="contact-number-input">
-                    <small>Format: +XX or +XXX followed by 10-digit number</small>
+                    <div class="contact-number-container">
+                    <input type="text" id="countrycode" name="countrycode"  placeholder="Country Code" maxlength="4" required class="country-code-input">
+                    <input type="tel" id="contactNumber" name="contactNumber"  placeholder="Contact Number" maxlength="10" required class="contact-number-input">
+                    <div class="error" id="countryCodeError"></div>
                     <div class="error" id="contactNumberError"></div>
                 </div>
+                </div>
+                
                 
                 <div class="form-group">
                     <label for="email">Email Address</label>
-                    <input type="email" id="email" name="email" required>
+                    <input type="email" id="email" name="email" class="email-input" required>
                     <div class="error" id="emailError"></div>
                 </div>
                 
@@ -409,7 +413,7 @@
                     </div>
                     
                     <div>
-                        <input type="radio" id="focusExperience" name="professionalBackground" value="Experience" required>
+                        <input type="radio" id="focusExperience" name="professionalBackground" value="Experienced" required>
                         <label for="focusExperience">I have Work Experience</label>
                     </div>
                 </div>

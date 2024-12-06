@@ -35,8 +35,12 @@ document.addEventListener('DOMContentLoaded', function() {
         let isValid = true;
         const firstName = document.getElementById('firstName');
         const lastName = document.getElementById('lastName');
+        const countryCode = document.getElementById('countrycode');
         const contactNumber = document.getElementById('contactNumber');
         const email = document.getElementById('email');
+           
+    const countryCodeRegex = /^\+\d{1,3}$/; // Country code: + followed by 1-3 digits
+    const contactNumberRegex = /^\d{10}$/; // Contact number: exactly 10 digits
 
         // First Name Validation
         if (!firstName.value.trim()) {
@@ -53,17 +57,27 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             document.getElementById('lastNameError').textContent = '';
         }
-        const contactNumberRegex = /^\+\d{1,3}\d{10}$/;
+        // Validate country code
+    if (!countryCode.value.trim()) {
+        document.getElementById('countryCodeError').textContent = 'Country Code is required';
+        isValid = false;
+    } else if (!countryCodeRegex.test(countryCode.value)) {
+        document.getElementById('countryCodeError').textContent = 'Country Code Must start with +';
+        isValid = false;
+    } else {
+        document.getElementById('countryCodeError').textContent = '';
+    }
 
-        if (!contactNumber.value.trim()) {
-            document.getElementById('contactNumberError').textContent = 'Contact Number is required';
-            isValid = false;
-        } else if (!contactNumberRegex.test(contactNumber.value.replace(/[^\d+]/g, ''))) {
-            document.getElementById('contactNumberError').textContent = 'Invalid Mobile number. Must start with + and country code (1-3 digits) followed by 10-digit number';
-            isValid = false;
-        } else {
-            document.getElementById('contactNumberError').textContent = '';
-        }
+    // Validate contact number
+    if (!contactNumber.value.trim()) {
+        document.getElementById('contactNumberError').textContent = 'Contact Number is required';
+        isValid = false;
+    } else if (!contactNumberRegex.test(contactNumber.value)) {
+        document.getElementById('contactNumberError').textContent = 'Invalid Mobile number. Must be exactly 10 digits';
+        isValid = false;
+    } else {
+        document.getElementById('contactNumberError').textContent = '';
+    }
 
         // Email Validation
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -114,6 +128,18 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         errorElement.textContent = '';
         return true;
+    }
+    // Helper function to validate date range
+    function validateDateRange(yearFrom, yearTo) {
+    // If either year is empty, consider it valid
+        if (!yearFrom || !yearTo) return true;
+
+    // Convert years to Date objects for comparison
+        const fromDate = new Date(yearFrom);
+        const toDate = new Date(yearTo);
+
+    // Check if fromDate is greater than toDate
+        return fromDate <= toDate;
     }
 
     // Navigation Event Listeners
@@ -267,6 +293,7 @@ document.addEventListener('DOMContentLoaded', function() {
     nextButtons.page8.addEventListener('click', function() {
         const educationEntries = document.querySelectorAll('#educationContainer .education-entry');
         let isValid = true;
+        let errorMessage = '';
 
         educationEntries.forEach(entry => {
             const yearFrom = entry.querySelector('input[name="educationYearFrom"]');
@@ -276,13 +303,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
             if (!yearFrom.value || !yearTo.value || !institution.value || !course.value) {
                 isValid = false;
+                errorMessage = 'Please fill in all education details';
             }
+            // Additional validation for date range
+        if (yearFrom.value && yearTo.value && !validateDateRange(yearFrom.value, yearTo.value)) {
+            isValid = false;
+            errorMessage = `Year(From) cannot be later than Year(To)`;
+        }
         });
 
         if (isValid) {
             showPage('page10');
         } else {
-            alert('Please fill in all education details');
+            alert(errorMessage);
         }
     });
 
@@ -295,7 +328,7 @@ document.addEventListener('DOMContentLoaded', function() {
     nextButtons.page9.addEventListener('click', function() {
         const experienceEntries = document.querySelectorAll('#experienceContainer .experience-entry');
         let isValid = true;
-
+        let errorMessage = '';
         experienceEntries.forEach(entry => {
             const yearFrom = entry.querySelector('input[name="experienceYearFrom"]');
             const yearTo = entry.querySelector('input[name="experienceYearTo"]');
@@ -304,13 +337,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
             if (!yearFrom.value || !yearTo.value || !company.value || !role.value) {
                 isValid = false;
+                errorMessage = 'Please fill in all work experience details';
             }
+            // Additional validation for date range
+        if (yearFrom.value && yearTo.value && !validateDateRange(yearFrom.value, yearTo.value)) {
+            isValid = false;
+            errorMessage = 'Year (From) cannot be later than Year (To)';
+            return; // Exit the current iteration
+        }
         });
 
         if (isValid) {
             showPage('page10');
         } else {
-            alert('Please fill in all work experience details');
+            alert(errorMessage);
         }
     });
 
@@ -458,15 +498,19 @@ prevButtons.page10.addEventListener('click', function() {
     handleDomainSelection();
    // Function to collect form data
    function collectFormData() {
+    const countryCodeInput = document.getElementById('countrycode');
+    const contactNumberInput = document.getElementById('contactNumber');
+    let fullContactNumber = `${countryCodeInput.value}${contactNumberInput.value}`;
     const professionalDomainElement = document.querySelector('input[name="professionalDomain"]:checked');
     const otherRoleValue = document.getElementById('otherRole')?.value;
     const professionalBackgroundElement = document.querySelector('input[name="professionalBackground"]:checked')?.value ;
+   
     
     // Initialize the form data object
     const formData = {
         firstName: document.getElementById('firstName').value,
         lastName: document.getElementById('lastName').value,
-        contactNumber: document.getElementById('contactNumber').value,
+        contactNumber: fullContactNumber,
         email: document.getElementById('email').value,
         locationPreference: document.querySelector('input[name="locationPreference"]:checked')?.value || '',
         engagementPreference: document.querySelector('input[name="engagementPreference"]:checked')?.value || '',
@@ -524,79 +568,87 @@ function reverseDateFormat(date) {
     const [year, month, day] = date.split('-');
     return `${day}-${month}-${year}`;
 }
-    // Modify the education and work experience collection
-    if (professionalDomainElement) {
-        // Special handling for Supervisor/Co-ordinator
-        if (professionalDomainElement.value === 'Supervisor/Co-ordinator') {
-            // Always collect work experience for Supervisor/Co-ordinator
-            const experienceEntries = document.querySelectorAll('#experienceContainer .experience-entry');
-            experienceEntries.forEach(entry => {
-                const yearFromInput = entry.querySelector('input[name="experienceYearFrom"]')?.value;
-                const yearToInput = entry.querySelector('input[name="experienceYearTo"]')?.value;
-                const yearFrom = yearFromInput ? reverseDateFormat(yearFromInput) : "";
-                const yearTo = yearToInput ? reverseDateFormat(yearToInput) : "";
-                const company = entry.querySelector('input[name="experienceCompany"]')?.value;
-                const role = entry.querySelector('input[name="experienceRole"]')?.value;
+// Separate function for Supervisor/Co-ordinator handling
+function handleSupervisorCoordinator() {
+    const experienceEntries = document.querySelectorAll('#experienceContainer .experience-entry');
+    experienceEntries.forEach(entry => {
+        const yearFromInput = entry.querySelector('input[name="experienceYearFrom"]')?.value;
+        const yearToInput = entry.querySelector('input[name="experienceYearTo"]')?.value;
+        const yearFrom = yearFromInput ? reverseDateFormat(yearFromInput) : "";
+        const yearTo = yearToInput ? reverseDateFormat(yearToInput) : "";
+        const company = entry.querySelector('input[name="experienceCompany"]')?.value;
+        const role = entry.querySelector('input[name="experienceRole"]')?.value;
 
-                if (yearFrom || yearTo || company || role) {
-                    const experienceItem = {
-                        yearFrom: yearFrom || '',
-                        yearTo: yearTo || '',
-                        company: company || '',
-                        role: role || ''
-                    };
-                    formData.workExperience.push(experienceItem);
-                }
-            });
-        } else {
-            // For other domains, use existing logic based on professional background
-            if (professionalBackgroundElement) {
-                if (professionalBackgroundElement?.value === 'Fresher') {
-                    // Collect education entries
-                    const educationEntries = document.querySelectorAll('#educationContainer .education-entry');
-                    educationEntries.forEach(entry => {
-                        const yearFromInput = entry.querySelector('input[name="educationYearFrom"]')?.value;
-                        const yearToInput = entry.querySelector('input[name="educationYearTo"]')?.value;
-                        const yearFrom = yearFromInput ? reverseDateFormat(yearFromInput) : "";
-                        const yearTo = yearToInput ? reverseDateFormat(yearToInput) : "";
-                        const institution = entry.querySelector('input[name="educationInstitution"]')?.value;
-                        const course = entry.querySelector('input[name="educationCourse"]')?.value;
+        if (yearFrom || yearTo || company || role) {
+            const experienceItem = {
+                yearFrom: yearFrom || '',
+                yearTo: yearTo || '',
+                company: company || '',
+                role: role || ''
+            };
+            formData.workExperience.push(experienceItem);
+        }
+    });
+}
 
-                        if (yearFrom || yearTo || institution || course) {
-                            const educationItem = {
-                                yearFrom: yearFrom || '',
-                                yearTo: yearTo || '',
-                                institution: institution || '',
-                                course: course || ''
-                            };
-                            formData.education.push(educationItem);
-                        }
-                    });
-                } else if (professionalBackgroundElement?.value === 'Experienced') {
-                    // Collect work experience entries
-                    const experienceEntries = document.querySelectorAll('#experienceContainer .experience-entry');
-                    experienceEntries.forEach(entry => {
-                        const yearFromInput = entry.querySelector('input[name="experienceYearFrom"]')?.value;
-                        const yearToInput = entry.querySelector('input[name="experienceYearTo"]')?.value;
-                        const yearFrom = yearFromInput ? reverseDateFormat(yearFromInput) : "";
-                        const yearTo = yearToInput ? reverseDateFormat(yearToInput) : "";
-                        const company = entry.querySelector('input[name="experienceCompany"]')?.value;
-                        const role = entry.querySelector('input[name="experienceRole"]')?.value;
+// Separate function for Experienced background handling
+function handleExperiencedBackground() {
+    const experienceEntries = document.querySelectorAll('#experienceContainer .experience-entry');
+    experienceEntries.forEach(entry => {
+        const yearFromInput = entry.querySelector('input[name="experienceYearFrom"]')?.value;
+        const yearToInput = entry.querySelector('input[name="experienceYearTo"]')?.value;
+        const yearFrom = yearFromInput ? reverseDateFormat(yearFromInput) : "";
+        const yearTo = yearToInput ? reverseDateFormat(yearToInput) : "";
+        const company = entry.querySelector('input[name="experienceCompany"]')?.value;
+        const role = entry.querySelector('input[name="experienceRole"]')?.value;
 
-                        if (yearFrom || yearTo || company || role) {
-                            const experienceItem = {
-                                yearFrom: yearFrom || '',
-                                yearTo: yearTo || '',
-                                company: company || '',
-                                role: role || ''
-                            };
-                            formData.workExperience.push(experienceItem);
-                        }
-                    });
-                }
-            }
+        if (yearFrom || yearTo || company || role) {
+            const experienceItem = {
+                yearFrom: yearFrom,
+                yearTo: yearTo,
+                company: company,
+                role: role
+            };
+            formData.workExperience.push(experienceItem);
+        }
+    });
+}
+
+// Separate function for Fresher background handling
+function handleFresherBackground() {
+    const educationEntries = document.querySelectorAll('#educationContainer .education-entry');
+    educationEntries.forEach(entry => {
+        const yearFromInput = entry.querySelector('input[name="educationYearFrom"]')?.value;
+        const yearToInput = entry.querySelector('input[name="educationYearTo"]')?.value;
+        const yearFrom = yearFromInput ? reverseDateFormat(yearFromInput) : "";
+        const yearTo = yearToInput ? reverseDateFormat(yearToInput) : "";
+        const institution = entry.querySelector('input[name="educationInstitution"]')?.value;
+        const course = entry.querySelector('input[name="educationCourse"]')?.value;
+
+        if (yearFrom || yearTo || institution || course) {
+            const educationItem = {
+                yearFrom: yearFrom,
+                yearTo: yearTo,
+                institution: institution,
+                course: course
+            };
+            formData.education.push(educationItem);
+        }
+    });
+}
+
+// Main condition handling
+if (professionalDomainElement) {
+    if (professionalDomainElement.value === 'Supervisor/Co-ordinator') {
+        handleSupervisorCoordinator();
+    } else if (professionalBackgroundElement) {
+        if ( document.querySelector('input[name="professionalBackground"]:checked')?.value === "Fresher") {
+            handleFresherBackground();
+        } else if(document.querySelector('input[name="professionalBackground"]:checked')?.value === "Experienced") {
+            handleExperiencedBackground();
         }
     }
+}
     // Collect show reel entries
     const showReelEntries = document.querySelectorAll('#showReelsContainer .show-reels-entry');
     showReelEntries.forEach(entry => {
@@ -618,7 +670,7 @@ function reverseDateFormat(date) {
 // Function to submit data to Google Apps Script
 function submitToGoogleScript(formData) {
     // Replace with your Google Apps Script deployment URL
-    const scriptUrl = 'https://script.google.com/macros/s/AKfycbwPjgy-DJJ_hK5fPg_fMe2MWZdKRdliR1FOR7xzAJheYbuQnVJlkVRbNxuaJn8kdLA9/exec';
+    const scriptUrl = 'https://script.google.com/macros/s/AKfycbxDXyZOj1QdaLHS5glGKLFRbhmuzEZvMeileiVZ_fppDKdNNux4B9IYG82IpVy1AX5I/exec';
 
     return fetch(scriptUrl, {
         method: 'POST',
@@ -639,7 +691,7 @@ function submitToGoogleScript(formData) {
     submitButton.addEventListener('click', async function(e) {
         e.preventDefault();
     
-        try {
+         try {
             const formData = collectFormData();
             const response = await submitToGoogleScript(formData);
             
@@ -647,12 +699,13 @@ function submitToGoogleScript(formData) {
                 alert('Application submitted successfully!');
                 // Optionally reset form or redirect
                 window.location.reload();
-            } else {
-                alert('Error submitting application. Please try again.');
+             } else {
+              alert('Error submitting application. Please try again.');
             }
-        } catch (error) {
-            alert('Error submitting application: ' + error.message);
-        }
+       } catch (error) {
+             alert('Error submitting application: ' + error.message);
+         }
+        
     
     })
     });
